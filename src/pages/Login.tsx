@@ -3,13 +3,21 @@ import { useNavigate } from "react-router-dom";
 import { Form, Input, Button, message, Card } from "antd";
 import "./Login.css"; 
 
+// Define a type for the form values
+interface LoginFormValues {
+  username: string;
+  password: string;
+}
+
 const Login: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const handleLogin = async (values: any) => {
+  // Type the values parameter
+  const handleLogin = async (values: LoginFormValues) => {
     setLoading(true);
     const { username, password } = values;
+
     if (username === "MuhammadAmin" && password === "1234") {
       localStorage.setItem("auth", "true");
       navigate("/");
