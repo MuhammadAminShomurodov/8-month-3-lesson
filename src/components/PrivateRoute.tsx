@@ -1,5 +1,5 @@
-import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import React from "react";
+import { Navigate, useLocation } from "react-router-dom";
 
 interface PrivateRouteProps {
   element: React.ReactElement;
@@ -7,7 +7,7 @@ interface PrivateRouteProps {
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ element }) => {
   const location = useLocation();
-  const isAuthenticated = localStorage.getItem('auth') === 'true';
+  const isAuthenticated = localStorage.getItem("auth") === "true";
 
   return isAuthenticated ? (
     element
