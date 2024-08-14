@@ -36,30 +36,24 @@ const StudentList: React.FC = () => {
   const fetchStudents = async () => {
     setLoading(true);
     try {
-      const response = await axios.get<Student[]>(
-        "http://localhost:3000/students"
-      );
+      const response = await axios.get<Student[]>("http://localhost:3000/students");
       setStudents(response.data);
     } catch (error) {
       console.error("Error fetching students:", error);
-      message.error("Failed to fetch students");
+      message.error("Failed to fetch students. Please check your server connection.");
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   const filterStudents = (query: string) => {
-    if (query) {
-      const lowercasedQuery = query.toLowerCase();
-      const filtered = students.filter(
-        (student) =>
-          student.name.toLowerCase().includes(lowercasedQuery) ||
-          student.email.toLowerCase().includes(lowercasedQuery)
-      );
-      setFilteredStudents(filtered);
-    } else {
-      setFilteredStudents(students);
-    }
+    const lowercasedQuery = query.toLowerCase();
+    const filtered = students.filter(
+      student =>
+        student.name.toLowerCase().includes(lowercasedQuery) ||
+        student.email.toLowerCase().includes(lowercasedQuery)
+    );
+    setFilteredStudents(filtered);
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,30 +79,20 @@ const StudentList: React.FC = () => {
     try {
       const values = await form.validateFields();
       if (isEditMode && currentStudent) {
-        await axios.put(
-          `http://localhost:3000/students/${currentStudent.id}`,
-          values
-        );
-        setStudents(
-          students.map((student) =>
-            student.id === currentStudent.id
-              ? { ...student, ...values }
-              : student
-          )
-        );
+        await axios.put(`http://localhost:3000/students/${currentStudent.id}`, values);
+        setStudents(students.map(student =>
+          student.id === currentStudent.id ? { ...student, ...values } : student
+        ));
         message.success("Student updated successfully");
       } else {
-        const response = await axios.post(
-          "http://localhost:3000/students",
-          values
-        );
+        const response = await axios.post("http://localhost:3000/students", values);
         setStudents([...students, response.data]);
         message.success("Student added successfully");
       }
       setIsModalOpen(false);
     } catch (error) {
       console.error("Error saving student:", error);
-      message.error("Failed to save student");
+      message.error("Failed to save student. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -127,20 +111,16 @@ const StudentList: React.FC = () => {
       cancelText: "Cancel",
       onOk: async () => {
         setDeletingId(id);
-        setTimeout(async () => {
-          setLoading(true);
-          try {
-            await axios.delete(`http://localhost:3000/students/${id}`);
-            setStudents(students.filter((student) => student.id !== id));
-            message.success("Student deleted successfully");
-          } catch (error) {
-            console.error("Error deleting student:", error);
-            message.error("Failed to delete student");
-          } finally {
-            setLoading(false);
-            setDeletingId(null);
-          }
-        }, 500);
+        try {
+          await axios.delete(`http://localhost:3000/students/${id}`);
+          setStudents(students.filter(student => student.id !== id));
+          message.success("Student deleted successfully");
+        } catch (error) {
+          console.error("Error deleting student:", error);
+          message.error("Failed to delete student. Please try again.");
+        } finally {
+          setDeletingId(null);
+        }
       },
     });
   };
@@ -245,27 +225,21 @@ const StudentList: React.FC = () => {
           <Form.Item
             name="name"
             label="Name"
-            rules={[
-              { required: true, message: "Please input the student name!" },
-            ]}
+            rules={[{ required: true, message: "Please input the student name!" }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             name="email"
             label="Email"
-            rules={[
-              { required: true, message: "Please input the student email!" },
-            ]}
+            rules={[{ required: true, message: "Please input the student email!" }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             name="age"
             label="Age"
-            rules={[
-              { required: true, message: "Please input the student age!" },
-            ]}
+            rules={[{ required: true, message: "Please input the student age!" }]}
           >
             <Input type="number" />
           </Form.Item>
