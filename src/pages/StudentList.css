@@ -1,0 +1,137 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #f4f4f9;
+  padding: 20px;
+  animation: fadeIn 1s ease-in;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #40a9ff;
+  box-shadow: 0 0 0 2px rgba(64, 169, 255, 0.2);
+}
+
+.add-button {
+  margin-right: 20px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-button:hover {
+  background-color: #1890ff;
+  transform: scale(1.02); 
+}
+
+.logout-button {
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.logout-button:hover {
+  background-color: #f5222d;
+  transform: scale(1.02);
+}
+
+.table-container {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  position: relative; 
+}
+
+.student-table {
+  animation: slideIn 0.5s ease-out;
+}
+
+.student-modal .ant-modal-body {
+  padding: 20px;
+}
+
+.student-modal .ant-form-item-label > label {
+  font-weight: bold;
+}
+
+.column-text {
+  display: block;
+  transition: color 0.3s ease;
+}
+
+.action-button {
+  transition: color 0.3s ease;
+}
+
+.action-button:hover {
+  color: #1890ff;
+}
+
+.student-row.fade-out {
+  animation: fadeOut 0.5s ease-out forwards;
+}
+
+.loading-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 1000;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
