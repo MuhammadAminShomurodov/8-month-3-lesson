@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
 interface PrivateRouteProps {
-  element: React.ReactNode; // Change from React.ReactElement to React.ReactNode
+  element: ReactNode;
 }
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ element }) => {
