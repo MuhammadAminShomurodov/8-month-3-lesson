@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import 'antd/dist/reset.css'; // Import Ant Design styles
+import 'antd/dist/reset.css'; 
 
 import StudentList from './pages/StudentList';
 import StudentForm from './pages/StudentForm';
 import Login from './pages/Login';
-import PrivateRoute from './components/PrivateRoute'; // Adjust the import path as needed
+import PrivateRoute from './components/PrivateRoute'; 
 
 const App: React.FC = () => (
   <Router>
